@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,13 @@ namespace Skyrim
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Player _player = new Player("Dohvak", "Argonian", 43, 2000000, 50321, 50);
+        
+        private readonly Player _player;
+
         public MainWindow()
         {
             InitializeComponent();
+            _player = new Player("Dohvak", "Nord", 43, 2000000, 50321, 50);
             DataContext = _player;
         }
     }
