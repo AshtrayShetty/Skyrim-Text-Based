@@ -81,10 +81,13 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Enemy/Civilian/Trader"/>
+                    <Label Grid.Row="0" Content="{Binding CurrentMonster.Name}"/>
                     <Label Grid.Row="1" Content="Enemy/Civilian/Trader Image"/>
-                    <Label Grid.Row="2" Content="Enemy/Civilian/Trader Description"/>
+                    <Label Grid.Row="2" Content="{Binding CurrentMonster.Level}"/>
+                    <Label Grid.Row="3" Content="{Binding CurrentMonster.Health}"/>
+                    
                 </Grid>
             </Border>
         </Grid>

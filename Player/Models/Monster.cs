@@ -7,6 +7,9 @@ namespace Engine.Models
     {
         private string _name;
         private string _enemyType;
+        private int _health;
+        private int _level;
+        
 
         public string Name
         {
@@ -26,9 +29,24 @@ namespace Engine.Models
                 OnPropertyChanged(nameof(EnemyType));
             }
         }
-        public int Health { get; set; }
-
-        private int _level;
+        public int Health
+        {
+            get => _health;
+            set
+            {
+                _health = value;
+                OnPropertyChanged(nameof(Health));
+            }
+        }
+        public int Level
+        {
+            get => _level;
+            set
+            {
+                _level = value;
+                OnPropertyChanged(nameof(Level));
+            }
+        }
         public Monster(string name, string enemyType)
         {
             Name = name;
@@ -52,9 +70,9 @@ namespace Engine.Models
         }
         public void SetHealth(Player player)
         {
-            if (EnemyType == "Animals/Bugs") { Health = 3 * player.Health / 5; }
-            else if (EnemyType == "Human") { Health = player.Health; }
-            else if (EnemyType == "Large") { Health = 5 * player.Health / 4; }
+            if (EnemyType == "Animals/Bugs") { _health = 3 * player.Health / 5; }
+            else if (EnemyType == "Human") { _health = player.Health; }
+            else if (EnemyType == "Large") { _health = 5 * player.Health / 4; }
         }
 
     }

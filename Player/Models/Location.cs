@@ -19,7 +19,7 @@ namespace Engine.Models
         public string Image { get; set; }
 
         public List<MonsterEncounter> monsters = new List<MonsterEncounter>();
-        public void AddMonster(int ID, int chanceOfEncountering)
+        public void AddMonster(int ID, double chanceOfEncountering)
         {
             if (!monsters.Any(m => m.ID == ID))
             {
@@ -35,16 +35,10 @@ namespace Engine.Models
         {
             if (!monsters.Any()) { return null; }
             Random rnd = new Random();
-            int totalChances = monsters.Sum(s => s.ChanceOfEncountering);
-            int chance = rnd.Next(1, totalChances);
-            int runningTotal = 0;
+            double chance = rnd.NextDouble();
             foreach (var monster in monsters)
             {
-                if (chance < totalChances)
-                {
-                    runningTotal += monster.ChanceOfEncountering;
-                    if (runningTotal <= totalChances) { return MonsterFactory.GetMonster(monster.ID); }
-                }
+                if (monster.ChanceOfEncountering <= chance) { return MonsterFactory.GetMonster(monster.ID); }
             }
             return MonsterFactory.GetMonster(monsters.Last().ID);
         }

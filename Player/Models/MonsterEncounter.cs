@@ -9,8 +9,8 @@ namespace Engine.Models
     public class MonsterEncounter
     {
         public int ID { get; set; }
-        public int ChanceOfEncountering { get; set; }
-        public MonsterEncounter(int ID, int chanceOfEncountering)
+        public double ChanceOfEncountering { get; set; }
+        public MonsterEncounter(int ID, double chanceOfEncountering)
         {
             this.ID = ID;
             ChanceOfEncountering = chanceOfEncountering;

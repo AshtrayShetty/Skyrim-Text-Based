@@ -33,6 +33,8 @@ namespace Engine.ViewModels
                 _currentMonster = value;
                 _currentMonster.SetHealth(CurrentPlayer);
                 _currentMonster.SetLevel(CurrentPlayer);
+                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged(nameof(HasMonster));
             }
         }
         public Location CurrentLocation
@@ -46,6 +48,8 @@ namespace Engine.ViewModels
                 OnPropertyChanged(nameof(HasWest));
                 OnPropertyChanged(nameof(HasEast));
                 OnPropertyChanged(nameof(HasSouth));
+                
+                GetMonstersAtLocation();
             }
         }
         public World CurrentWorld { get; set; }
@@ -55,10 +59,11 @@ namespace Engine.ViewModels
             CurrentWorld = WorldFactory.CreateWorld();
             CurrentLocation = CurrentWorld.LocationAt(0, 0);   
         }
-        public bool HasNorth => CurrentWorld.LocationAt(CurrentLocation.xCoord, CurrentLocation.yCoord + 1) != null ? true : false;
-        public bool HasWest => CurrentWorld.LocationAt(CurrentLocation.xCoord - 1, CurrentLocation.yCoord) != null ? true : false;
-        public bool HasEast => CurrentWorld.LocationAt(CurrentLocation.xCoord + 1, CurrentLocation.yCoord) != null ? true : false;
-        public bool HasSouth => CurrentWorld.LocationAt(CurrentLocation.xCoord, CurrentLocation.yCoord - 1) != null ? true : false;
+        public bool HasNorth => CurrentWorld.LocationAt(CurrentLocation.xCoord, CurrentLocation.yCoord + 1) != null;
+        public bool HasWest => CurrentWorld.LocationAt(CurrentLocation.xCoord - 1, CurrentLocation.yCoord) != null;
+        public bool HasEast => CurrentWorld.LocationAt(CurrentLocation.xCoord + 1, CurrentLocation.yCoord) != null;
+        public bool HasSouth => CurrentWorld.LocationAt(CurrentLocation.xCoord, CurrentLocation.yCoord - 1) != null;
+        public bool HasMonster => CurrentMonster != null;
         public void MoveNorth()
         {
             if (HasNorth) { CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.xCoord, CurrentLocation.yCoord + 1); }
@@ -75,6 +80,7 @@ namespace Engine.ViewModels
         {
             if (HasSouth) { CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.xCoord, CurrentLocation.yCoord - 1); }
         }
+        private void GetMonstersAtLocation() { CurrentLocation.GetMonster(); }
         private void RaiseMessage(string message)
         {
             OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));

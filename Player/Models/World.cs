@@ -12,18 +12,25 @@ namespace Engine.Models
 
         internal void AddLocation(int xCoord, int yCoord, string name, string description, int width, int height, string type, string image)
         {
-            Location location = new Location
+            for(int i=0; i<width; i++)
             {
-                xCoord = xCoord,
-                yCoord = yCoord,
-                Name = name,
-                Description = description,
-                Width = width,
-                Height = height,
-                Type = type,
-                Image = image
-            };
-            if (!_locations.Any(l => l.Equals(location))){ _locations.Add(location); }
+                for(int j=0; j<height; j++)
+                {
+                    Location location = new Location
+                    {
+                        xCoord = xCoord+i,
+                        yCoord = yCoord+j,
+                        Name = name,
+                        Description = description,
+                        Width = width,
+                        Height = height,
+                        Type = type,
+                        Image = image
+                    };
+
+                    _locations.Add(location);
+                }
+            }
         }
 
         public Location LocationAt(int xCoord, int yCoord)
