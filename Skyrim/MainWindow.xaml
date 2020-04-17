@@ -32,15 +32,15 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
-                <Label Grid.Row="0" Grid.Column="1" Content="{Binding name}"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding CurrentPlayer.Name}"/>
                 <Label Grid.Row="1" Grid.Column="0" Content="Character Class:"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="{Binding characterClass}"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding CurrentPlayer.CharacterClass}"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="Level:"/>
-                <Label Grid.Row="2" Grid.Column="1" Content="{Binding level}"/>
+                <Label Grid.Row="2" Grid.Column="1" Content="{Binding CurrentPlayer.Level}"/>
                 <Label Grid.Row="3" Grid.Column="0" Content="XP:"/>
-                <Label Grid.Row="3" Grid.Column="1" Content="{Binding XP}"/>
+                <Label Grid.Row="3" Grid.Column="1" Content="{Binding CurrentPlayer.XP}"/>
                 <Label Grid.Row="4" Grid.Column="0" Content="Gold:"/>
-                <Label Grid.Row="4" Grid.Column="1" Content="{Binding gold}"/>
+                <Label Grid.Row="4" Grid.Column="1" Content="{Binding CurrentPlayer.Gold}"/>
             </Grid>
         </Border>
         <Grid Grid.Row="1" Grid.Column="1">
@@ -53,7 +53,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <RichTextBox x:Name="GameMessages" Grid.Row="0" Grid.Column="0" 
-                         Grid.RowSpan="2"  VerticalScrollBarVisibility="Auto">
+                         Grid.RowSpan="2"  VerticalScrollBarVisibility="Auto" IsReadOnly="True">
                 <RichTextBox.Resources>
                     <Style TargetType="{x:Type Paragraph}">
                         <Setter Property="Margin" Value="0"/>
@@ -65,11 +65,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="56"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="Province/Place"/>
+                    <Label Grid.Row="0" Content="{Binding CurrentLocation.Name}"/>
                     <Label Grid.Row="1" Content="Province/Place Image"/>
-                    <Label Grid.Row="2" Content="Description"/>
+                    <TextBlock Grid.Row="2" Text="{Binding CurrentLocation.Description}" TextWrapping="Wrap"/>
                 </Grid>
             </Border>
             <Border Grid.Row="1" Grid.Column="1" BorderBrush="Gainsboro" BorderThickness="2">

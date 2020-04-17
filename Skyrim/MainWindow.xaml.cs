@@ -13,7 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Engine.EventArgs;
 using Engine.Models;
+using Engine.ViewModels;
 
 namespace Skyrim
 {
@@ -22,14 +24,19 @@ namespace Skyrim
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-        private readonly Player _player;
+
+        private readonly GameSession _gameSession = new GameSession();
 
         public MainWindow()
         {
             InitializeComponent();
-            _player = new Player("Dohvak", "Nord", 43, 2000000, 50321, 50);
-            DataContext = _player;
+            _gameSession.OnMessageRaised += OnGameMessageRaised;
+            DataContext = _gameSession;
+        }
+        private void OnGameMessageRaised(object sender, GameMessageEventArgs e)
+        {
+            GameMessages.Document.Blocks.Add(new Paragraph(new Run(e.message)));
+            GameMessages.ScrollToEnd();
         }
     }
 }
