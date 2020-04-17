@@ -10,21 +10,23 @@ namespace Engine.Models
     {
         private List<Location> _locations = new List<Location>();
 
-        internal void addLocation(int xCoord, int yCoord, string name, string description, string type, int width, int height, string image)
+        internal void AddLocation(int xCoord, int yCoord, string name, string description, string type, int width, int height, string image)
         {
-            Location location = new Location();
-            location.xCoord = xCoord;
-            location.yCoord = yCoord;
-            location.name = name;
-            location.description = description;
-            location.type = type;
-            location.width = width;
-            location.height = height;
-            location.image = image;
+            Location location = new Location
+            {
+                xCoord = xCoord,
+                yCoord = yCoord,
+                Name = name,
+                Description = description,
+                Type = type,
+                Width = width,
+                Height = height,
+                Image = image
+            };
             if (!_locations.Any(l => l.Equals(location))){ _locations.Add(location); }
         }
 
-        public Location locationAt(int xCoord, int yCoord)
+        public Location LocationAt(int xCoord, int yCoord)
         {
             foreach(Location location in _locations)
             {
