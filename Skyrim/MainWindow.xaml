@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:Skyrim"
         mc:Ignorable="d"
         Title="Skyrim" Height="768" Width="1024">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -140,11 +143,15 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="1" Content="North"/>
-                    <Button Grid.Row="1" Grid.Column="0" Content="West"/>
+                    <Button Grid.Row="0" Grid.Column="1" Content="North" Click="MoveNorth" 
+                            Visibility="{Binding HasNorth, Converter={StaticResource BooleanToVisibility}}"/>
+                    <Button Grid.Row="1" Grid.Column="0" Content="West" Click="MoveWest" 
+                            Visibility="{Binding HasWest, Converter={StaticResource BooleanToVisibility}}"/>
                     <Button Grid.Row="1" Grid.Column="1" Content="Trade" Margin="1,2,1,1"/>
-                    <Button Grid.Row="1" Grid.Column="2" Content="East"/>
-                    <Button Grid.Row="2" Grid.Column="1" Content="South"/>
+                    <Button Grid.Row="1" Grid.Column="2" Content="East" Click="MoveEast" 
+                            Visibility="{Binding HasEast, Converter={StaticResource BooleanToVisibility}}"/>
+                    <Button Grid.Row="2" Grid.Column="1" Content="South" Click="MoveSouth" 
+                            Visibility="{Binding HasSouth, Converter={StaticResource BooleanToVisibility}}"/>
                 </Grid>
             </Border>
         </Grid>

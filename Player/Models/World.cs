@@ -10,7 +10,7 @@ namespace Engine.Models
     {
         private List<Location> _locations = new List<Location>();
 
-        internal void AddLocation(int xCoord, int yCoord, string name, string description, string type, int width, int height, string image)
+        internal void AddLocation(int xCoord, int yCoord, string name, string description, int width, int height, string type, string image)
         {
             Location location = new Location
             {
@@ -18,9 +18,9 @@ namespace Engine.Models
                 yCoord = yCoord,
                 Name = name,
                 Description = description,
-                Type = type,
                 Width = width,
                 Height = height,
+                Type = type,
                 Image = image
             };
             if (!_locations.Any(l => l.Equals(location))){ _locations.Add(location); }
@@ -30,7 +30,7 @@ namespace Engine.Models
         {
             foreach(Location location in _locations)
             {
-                if(location.xCoord==xCoord && location.yCoord == yCoord) { return location; }
+                if (location.xCoord == xCoord && location.yCoord == yCoord) { return location; }
             }
             return null;
         }

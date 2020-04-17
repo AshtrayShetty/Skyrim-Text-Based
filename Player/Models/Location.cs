@@ -13,9 +13,9 @@ namespace Engine.Models
         public int yCoord { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Type { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        public string Type { get; set; }
         public string Image { get; set; }
 
         public List<MonsterEncounter> monsters = new List<MonsterEncounter>();

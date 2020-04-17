@@ -38,5 +38,9 @@ namespace Skyrim
             GameMessages.Document.Blocks.Add(new Paragraph(new Run(e.message)));
             GameMessages.ScrollToEnd();
         }
+        private void MoveNorth(object sender, RoutedEventArgs e) { _gameSession.MoveNorth(); }
+        private void MoveWest(object sender, RoutedEventArgs e) { _gameSession.MoveWest(); }
+        private void MoveEast(object sender, RoutedEventArgs e) { _gameSession.MoveEast(); }
+        private void MoveSouth(object sender, RoutedEventArgs e) { _gameSession.MoveSouth(); }
     }
 }
