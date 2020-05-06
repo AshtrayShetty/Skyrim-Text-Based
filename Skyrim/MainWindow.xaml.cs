@@ -28,6 +28,10 @@ namespace Skyrim
             InitializeComponent();
             log4net.Config.XmlConfigurator.Configure();
             _gameSession = new GameSession();
+
+            // 'RaiseGameMessage' function will be executed when the event takes place.
+            _gameSession.OnMessageRaised += RaiseGameMessage;
+
             DataContext = _gameSession;
             //log.Info($"{DataContext.ToString()}");
         }
@@ -62,6 +66,12 @@ namespace Skyrim
             {
                 _gameSession.CurrentLocation = _gameSession.CurrentWorld.LocationAt(_gameSession.CurrentLocation.xCoord + 1, _gameSession.CurrentLocation.yCoord);
             }
+        }
+
+        private void RaiseGameMessage(object sender, GameMessageEventArgs e)
+        {
+            GameMessages.Document.Blocks.Add(new Paragraph(new Run(e.Message)));
+            GameMessages.ScrollToEnd();
         }
     }
 }

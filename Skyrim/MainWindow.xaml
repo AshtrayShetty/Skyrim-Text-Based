@@ -86,7 +86,14 @@
                     <Label Grid.Row="0" Content="{Binding CurrentMonster.Name}"/>
                     <Label Grid.Row="1" Content="Enemy/Civilian/Trader Image"/>
                     <Label Grid.Row="2" Content="{Binding CurrentMonster.Description}"/>
-                    <Label Grid.Row="3" Content="{Binding CurrentMonster.Health}"/>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Health:"/>
+                        <Label Grid.Column="1" Content="{Binding CurrentMonster.Health}"/>
+                    </Grid>
 
                 </Grid>
             </Border>

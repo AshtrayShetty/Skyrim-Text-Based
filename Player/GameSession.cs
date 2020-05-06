@@ -36,6 +36,12 @@ namespace Engine
                 _currentMonster = value;
                 OnPropertyChanged(nameof(CurrentMonster));
                 OnPropertyChanged(nameof(HasMonster));
+
+                if (CurrentMonster != null)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"You see a {CurrentMonster.Name} here.");
+                }
             }
         }
         public GameSession()
@@ -55,10 +61,17 @@ namespace Engine
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<GameMessageEventArgs> OnMessageRaised;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // Custom event. (to raise message in the rich text box on some event)
+        private void RaiseMessage(string message)
+        {
+            OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));
         }
     }
 }
