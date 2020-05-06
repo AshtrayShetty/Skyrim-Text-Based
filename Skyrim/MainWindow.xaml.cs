@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,36 +10,58 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Engine.EventArgs;
-using Engine.Models;
-using Engine.ViewModels;
+using Engine;
+using log4net;
 
 namespace Skyrim
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CreateChar.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private readonly GameSession _gameSession = new GameSession();
-
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private GameSession _gameSession;
         public MainWindow()
         {
             InitializeComponent();
-            _gameSession.OnMessageRaised += OnGameMessageRaised;
+            log4net.Config.XmlConfigurator.Configure();
+            _gameSession = new GameSession();
             DataContext = _gameSession;
+            //log.Info($"{DataContext.ToString()}");
         }
-        private void OnGameMessageRaised(object sender, GameMessageEventArgs e)
+
+        private void Button_Click_North(object sender, RoutedEventArgs e)
         {
-            GameMessages.Document.Blocks.Add(new Paragraph(new Run(e.message)));
-            GameMessages.ScrollToEnd();
+            if (_gameSession.HasNorth) 
+            { 
+                _gameSession.CurrentLocation = _gameSession.CurrentWorld.LocationAt(_gameSession.CurrentLocation.xCoord, _gameSession.CurrentLocation.yCoord + 1); 
+            }
         }
-        private void MoveNorth(object sender, RoutedEventArgs e) { _gameSession.MoveNorth(); }
-        private void MoveWest(object sender, RoutedEventArgs e) { _gameSession.MoveWest(); }
-        private void MoveEast(object sender, RoutedEventArgs e) { _gameSession.MoveEast(); }
-        private void MoveSouth(object sender, RoutedEventArgs e) { _gameSession.MoveSouth(); }
+
+        private void Button_Click_West(object sender, RoutedEventArgs e)
+        {
+            if (_gameSession.HasWest)
+            {
+                _gameSession.CurrentLocation = _gameSession.CurrentWorld.LocationAt(_gameSession.CurrentLocation.xCoord - 1, _gameSession.CurrentLocation.yCoord);
+            }
+        }
+
+        private void Button_Click_South(object sender, RoutedEventArgs e)
+        {
+            if (_gameSession.HasSouth)
+            {
+                _gameSession.CurrentLocation = _gameSession.CurrentWorld.LocationAt(_gameSession.CurrentLocation.xCoord, _gameSession.CurrentLocation.yCoord - 1);
+            }
+        }
+
+        private void Button_Click_East(object sender, RoutedEventArgs e)
+        {
+            if (_gameSession.HasEast)
+            {
+                _gameSession.CurrentLocation = _gameSession.CurrentWorld.LocationAt(_gameSession.CurrentLocation.xCoord + 1, _gameSession.CurrentLocation.yCoord);
+            }
+        }
     }
 }

@@ -68,7 +68,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="56"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="{Binding CurrentLocation.Name}"/>
                     <Label Grid.Row="1" Content="Province/Place Image"/>
@@ -85,9 +85,9 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="{Binding CurrentMonster.Name}"/>
                     <Label Grid.Row="1" Content="Enemy/Civilian/Trader Image"/>
-                    <Label Grid.Row="2" Content="{Binding CurrentMonster.Level}"/>
+                    <Label Grid.Row="2" Content="{Binding CurrentMonster.Description}"/>
                     <Label Grid.Row="3" Content="{Binding CurrentMonster.Health}"/>
-                    
+
                 </Grid>
             </Border>
         </Grid>
@@ -100,7 +100,7 @@
                             <DataGridTextColumn Header="Type" Width="*"/>
                             <DataGridTextColumn Header="Quantity" Width="*"/>
                         </DataGrid.Columns>
-                    </DataGrid>  
+                    </DataGrid>
                 </TabItem>
                 <TabItem Header="Quests">
                     <DataGrid AutoGenerateColumns="False" HeadersVisibility="Column">
@@ -146,15 +146,11 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="1" Content="North" Click="MoveNorth" 
-                            Visibility="{Binding HasNorth, Converter={StaticResource BooleanToVisibility}}"/>
-                    <Button Grid.Row="1" Grid.Column="0" Content="West" Click="MoveWest" 
-                            Visibility="{Binding HasWest, Converter={StaticResource BooleanToVisibility}}"/>
+                    <Button Grid.Row="0" Grid.Column="1" Content="North" Click="Button_Click_North" Visibility="{Binding HasNorth, Converter={StaticResource BooleanToVisibility}}"/>
+                    <Button Grid.Row="1" Grid.Column="0" Content="West" Click="Button_Click_West" Visibility="{Binding HasWest, Converter={StaticResource BooleanToVisibility}}"/>
                     <Button Grid.Row="1" Grid.Column="1" Content="Trade" Margin="1,2,1,1"/>
-                    <Button Grid.Row="1" Grid.Column="2" Content="East" Click="MoveEast" 
-                            Visibility="{Binding HasEast, Converter={StaticResource BooleanToVisibility}}"/>
-                    <Button Grid.Row="2" Grid.Column="1" Content="South" Click="MoveSouth" 
-                            Visibility="{Binding HasSouth, Converter={StaticResource BooleanToVisibility}}"/>
+                    <Button Grid.Row="1" Grid.Column="2" Content="East" Click="Button_Click_East" Visibility="{Binding HasEast, Converter={StaticResource BooleanToVisibility}}"/>
+                    <Button Grid.Row="2" Grid.Column="1" Content="South" Click="Button_Click_South" Visibility="{Binding HasSouth, Converter={StaticResource BooleanToVisibility}}"/>
                 </Grid>
             </Border>
         </Grid>
