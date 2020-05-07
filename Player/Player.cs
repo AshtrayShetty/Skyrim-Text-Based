@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -55,6 +56,8 @@ namespace Engine
                 OnPropertyChanged(nameof(Gold));
             }
         }
+        // Observable collection automatically updates the UI
+        public ObservableCollection<Item> Inventory { get; set; } = new ObservableCollection<Item>();
         public Player(string name, string charClass, int health, int level, int xp, int gold)
         {
             Name = name;

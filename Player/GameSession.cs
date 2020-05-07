@@ -11,7 +11,16 @@ namespace Engine
     {
         private Location _currentLocation;
         private Monster _currentMonster;
-        public Player CurrentPlayer { get; set; }
+        private Player _currentPlayer;
+        public Player CurrentPlayer
+        {
+            get => _currentPlayer;
+            set
+            {
+                _currentPlayer = value;
+                OnPropertyChanged(nameof(Player));
+            }
+        }
         public World CurrentWorld { get; set; }
         public Location CurrentLocation
         {
@@ -47,6 +56,7 @@ namespace Engine
         public GameSession()
         {
             CurrentPlayer = new Player("Dohvak", "Nord", 100, 1, 0, 0);
+            ItemFactory.AddItem(1, 1, CurrentPlayer.Inventory);
             CurrentWorld = WorldFactory.CreateWorld();
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
         }
