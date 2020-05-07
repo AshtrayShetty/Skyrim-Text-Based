@@ -17,6 +17,7 @@ namespace Engine
                 "It is destroyed in the prologue by Alduin.");
 
             Skyrim.LocationAt(0, 0).AddMonster(1, 0.99);
+            QuestFactory.GiveQuest(1, Skyrim.LocationAt(0, 0));
 
             return Skyrim;
         }

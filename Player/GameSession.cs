@@ -34,6 +34,7 @@ namespace Engine
                 OnPropertyChanged(nameof(HasWest));
                 OnPropertyChanged(nameof(HasEast));
 
+                GiveQuestAtLocation();
                 GetMonstersAtLocation();
             }
         }
@@ -69,7 +70,13 @@ namespace Engine
         {
             CurrentMonster = CurrentLocation.GetMonster();
         }
-
+        private void GiveQuestAtLocation()
+        {
+            if (CurrentLocation.QuestHere != null)
+            {
+                CurrentPlayer.Quests.Add(CurrentLocation.QuestHere);
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<GameMessageEventArgs> OnMessageRaised;
 

@@ -13,6 +13,7 @@ namespace Engine
         private int _yCoord;
         private string _name;
         private string _description;
+        private Quest _quest;
         public int xCoord
         {
             get => _xCoord;
@@ -49,6 +50,15 @@ namespace Engine
                 OnPropertyChanged(nameof(Description));
             }
         }
+        public Quest QuestHere
+        {
+            get => _quest;
+            set
+            {
+                _quest = value;
+                OnPropertyChanged(nameof(QuestHere));
+            }
+        }
         public Location(int x, int y, string name, string desc)
         {
             xCoord = x;
@@ -57,7 +67,6 @@ namespace Engine
             Description = desc;
         }
         public Location() { }
-
         private List<MonsterEncounter> _monsters { get; set; } = new List<MonsterEncounter>();
         public void AddMonster(int id, double chanceOfEncountering)
         {

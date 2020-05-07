@@ -58,6 +58,7 @@ namespace Engine
         }
         // Observable collection automatically updates the UI
         public ObservableCollection<Item> Inventory { get; set; } = new ObservableCollection<Item>();
+        public ObservableCollection<Quest> Quests { get; set; } = new ObservableCollection<Quest>();
         public Player(string name, string charClass, int health, int level, int xp, int gold)
         {
             Name = name;
