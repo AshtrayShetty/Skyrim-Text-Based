@@ -58,6 +58,7 @@ namespace Engine
         }
         // Observable collection automatically updates the UI
         public ObservableCollection<Item> Inventory { get; set; } = new ObservableCollection<Item>();
+        public List<Item> Weapons => Inventory.Where(i => i.Type.Equals("Weapon") || i.Type.Equals("Potion")).ToList();
         public ObservableCollection<Quest> Quests { get; set; } = new ObservableCollection<Quest>();
         public Player(string name, string charClass, int health, int level, int xp, int gold)
         {
@@ -69,8 +70,18 @@ namespace Engine
             Gold = gold;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        // Function to add item to inventory and notify UI about change in the Weapons List
+        public void AddItemToInventory(int id, int quantity)
+        {
+            while (quantity > 0)
+            {
+                Inventory.Add(ItemFactory.AddItem(id));
+                --quantity;
+                OnPropertyChanged(nameof(Weapons));
+            }
+        }
 
+        public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             // If any class is listening, only then use the event handler

@@ -54,10 +54,17 @@ namespace Engine
                 }
             }
         }
+        public Item CurrentItem { get; set; }
         public GameSession()
         {
             CurrentPlayer = new Player("Dohvak", "Nord", 100, 1, 0, 0);
-            ItemFactory.AddItem(1, 1, CurrentPlayer.Inventory);
+
+            if (!CurrentPlayer.Weapons.Any())
+            {
+                CurrentPlayer.AddItemToInventory(1, 1);
+                CurrentPlayer.AddItemToInventory(2, 1);
+            }
+
             CurrentWorld = WorldFactory.CreateWorld();
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
         }
@@ -75,6 +82,45 @@ namespace Engine
             if (CurrentLocation.QuestHere != null)
             {
                 CurrentPlayer.Quests.Add(CurrentLocation.QuestHere);
+                CurrentLocation.QuestHere = null;
+            }
+        }
+        public void UseInventory()
+        {
+            if (CurrentMonster == null)
+            {
+                if (CurrentItem == null)
+                {
+                    RaiseMessage("You don't have a weapon in your hand");
+                    return;
+                }
+                if (CurrentItem.Type.Equals("Weapon"))
+                {
+                    RaiseMessage("There is no monster here.");
+                    RaiseMessage("You decide it is a stupid idea to take your weapon out.");
+                    RaiseMessage("");
+                    return;
+                }
+            }
+            if (CurrentItem == null) 
+            { 
+                RaiseMessage("You must select a weapon to attack");
+                return;
+            }
+            if (CurrentItem.MinDamage < 0)
+            {
+                CurrentPlayer.Health -= CurrentItem.MinDamage;
+                RaiseMessage($"You gained {CurrentItem.MinDamage} health points");
+                RaiseMessage("");
+                CurrentPlayer.Inventory.Remove(CurrentItem);
+            }
+            else
+            {
+                Random rnd = new Random();
+                int damage = rnd.Next(CurrentItem.MinDamage, CurrentItem.MaxDamage);
+                CurrentMonster.Health -= damage;
+                RaiseMessage($"You did {damage} points damage to the {CurrentMonster.Name}");
+                RaiseMessage("");
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

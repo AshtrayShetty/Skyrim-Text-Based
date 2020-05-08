@@ -9,21 +9,18 @@ namespace Engine
 {
     public static class ItemFactory
     {
-        public static void AddItem(int id, int quantity, ObservableCollection<Item> list)
+        public static Item AddItem(int id)
         {
-            while (quantity>0)
+            switch (id)
             {
-                switch (id)
-                {
-                    case 1:
-                        Item item = new Item("Iron Dagger", "Weapon", 25, 25, 35);
-                        list.Add(item);
-                        break;
+                case 1:
+                    return new Item(id ,"Iron Dagger", "Weapon", 25, 25, 35);
 
-                    default:
-                        break;
-                }
-                --quantity;
+                case 2:
+                    return new Item(id, "Apple", "Potion", 5, -10, 0);
+
+                default:
+                    throw new ArgumentNullException();
             }
         }
     }

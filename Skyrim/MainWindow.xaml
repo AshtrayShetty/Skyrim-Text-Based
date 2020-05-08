@@ -29,6 +29,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -42,8 +43,10 @@
                 <Label Grid.Row="2" Grid.Column="1" Content="{Binding CurrentPlayer.Level}"/>
                 <Label Grid.Row="3" Grid.Column="0" Content="XP:"/>
                 <Label Grid.Row="3" Grid.Column="1" Content="{Binding CurrentPlayer.XP}"/>
-                <Label Grid.Row="4" Grid.Column="0" Content="Gold:"/>
-                <Label Grid.Row="4" Grid.Column="1" Content="{Binding CurrentPlayer.Gold}"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Health:"/>
+                <Label Grid.Row="4" Grid.Column="1" Content="{Binding CurrentPlayer.Health}"/>
+                <Label Grid.Row="5" Grid.Column="0" Content="Gold:"/>
+                <Label Grid.Row="5" Grid.Column="1" Content="{Binding CurrentPlayer.Gold}"/>
             </Grid>
         </Border>
         <Grid Grid.Row="1" Grid.Column="1">
@@ -137,8 +140,9 @@
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Item To Use"/>
-                    <ComboBox Grid.Row="1" Grid.Column="0" Width="150"/>
-                    <Button Grid.Row="1" Grid.Column="2" Width="50" Content="Use"/>
+                    <ComboBox x:Name="ItemSelect" Grid.Row="1" Grid.Column="0" Width="150" ItemsSource="{Binding CurrentPlayer.Weapons}"
+                              SelectedValue="{Binding CurrentItem}" DisplayMemberPath="Name" SelectedValuePath="ID"/>
+                    <Button Grid.Row="1" Grid.Column="2" Width="50" Content="Use" Height="22" VerticalAlignment="Top" Click="Button_Click_Use"/>
                 </Grid>
             </Border>
             <Border Grid.Row="0" Grid.Column="1" BorderBrush="Gainsboro" BorderThickness="2">

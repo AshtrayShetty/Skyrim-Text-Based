@@ -33,7 +33,7 @@ namespace Skyrim
             _gameSession.OnMessageRaised += RaiseGameMessage;
 
             DataContext = _gameSession;
-            //log.Info($"{DataContext.ToString()}");
+            // log.Info($"{_gameSession.CurrentItem}");
         }
 
         private void Button_Click_North(object sender, RoutedEventArgs e)
@@ -66,6 +66,12 @@ namespace Skyrim
             {
                 _gameSession.CurrentLocation = _gameSession.CurrentWorld.LocationAt(_gameSession.CurrentLocation.xCoord + 1, _gameSession.CurrentLocation.yCoord);
             }
+        }
+
+        private void Button_Click_Use(object sender, RoutedEventArgs e)
+        {
+            _gameSession.CurrentItem = ItemSelect.SelectedItem as Item;
+            _gameSession.UseInventory();
         }
 
         private void RaiseGameMessage(object sender, GameMessageEventArgs e)
