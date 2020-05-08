@@ -19,6 +19,9 @@ namespace Engine
                 case 2:
                     return new Item(id, "Apple", "Potion", 5, -10, 0);
 
+                case 3:
+                    return new Item(id, "Skewer Tail", "Misc", 10, 0, 0);
+
                 default:
                     throw new ArgumentNullException();
             }

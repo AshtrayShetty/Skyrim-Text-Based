@@ -85,6 +85,7 @@ namespace Engine
             Inventory.Remove(item);
             OnPropertyChanged(nameof(Weapons));
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

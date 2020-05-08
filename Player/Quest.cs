@@ -13,6 +13,7 @@ namespace Engine
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsFinished { get; set; }
+
         // public ObservableCollection<Item> ItemsList { get; set; } = new ObservableCollection<Item>();
         public Quest(string name, string desc)
         {

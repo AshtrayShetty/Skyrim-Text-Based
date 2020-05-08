@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Engine
 {
@@ -69,6 +70,7 @@ namespace Engine
                 OnPropertyChanged(nameof(MaxDamage));
             }
         }
+        public ObservableCollection<Item> RewardItems { get; set; } = new ObservableCollection<Item>();
         public Monster(string name, string desc, int health, int gold, int minDamage, int maxDamage)
         {
             Name = name;

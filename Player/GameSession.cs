@@ -145,6 +145,15 @@ namespace Engine
                 {
                     RaiseMessage($"You beat the {CurrentMonster.Name}!!");
                     RaiseMessage("");
+                    while (CurrentMonster.RewardItems.Count != 0)
+                    {
+                        CurrentPlayer.AddItemToInventory(CurrentMonster.RewardItems[0].ID, 1);
+                        RaiseMessage($"You received a {CurrentMonster.RewardItems[0].Name}!");
+                        CurrentMonster.RewardItems.Remove(CurrentMonster.RewardItems[0]);
+                    }
+                    RaiseMessage("");
+                    RaiseMessage($"You received {CurrentMonster.Gold} gold");
+                    CurrentPlayer.Gold += CurrentMonster.Gold;
                     CurrentMonster = null;
                     return;
                 }

@@ -15,7 +15,6 @@ namespace Engine
             {
                 case 1:
                     location.QuestHere = new Quest("Escape from helgen", "Flee from the scene of destruction caused by Alduin and get to safety");
-                    // ItemFactory.AddItem(1, 1, location.QuestHere.ItemsList);
                     break;
 
                 default:
