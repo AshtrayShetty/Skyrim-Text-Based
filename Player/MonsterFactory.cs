@@ -15,7 +15,7 @@ namespace Engine
             switch (id)
             {
                 case 1:
-                    Monster skewer = new Monster("Skewer", "A huge ass filthy rat", 50, 3);
+                    Monster skewer = new Monster("Skewer", "A huge ass filthy rat", 50, 3, 10, 35);
                     return skewer;
                 default:
                     throw new ArgumentNullException();

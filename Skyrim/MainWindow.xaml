@@ -79,7 +79,7 @@
                 </Grid>
             </Border>
             <Border Grid.Row="1" Grid.Column="1" BorderBrush="Gainsboro" BorderThickness="2">
-                <Grid>
+                <Grid Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>

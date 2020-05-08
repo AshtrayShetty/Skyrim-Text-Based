@@ -87,6 +87,8 @@ namespace Engine
         }
         public void UseInventory()
         {
+            Random rnd = new Random();
+
             if (CurrentMonster == null)
             {
                 if (CurrentItem == null)
@@ -107,20 +109,45 @@ namespace Engine
                 RaiseMessage("You must select a weapon to attack");
                 return;
             }
+            if (CurrentMonster.Health > 0) 
+            {
+                if (CurrentPlayer.Health > 0)
+                {
+                    int damage = rnd.Next(CurrentMonster.MinDamage, CurrentMonster.MaxDamage);
+                    CurrentPlayer.Health -= damage;
+                    RaiseMessage($"The {CurrentMonster.Name} dealt {damage} points damage");
+                }
+                else
+                {
+                    RaiseMessage("You succumbed to your injuries in the heat of battle.");
+                    RaiseMessage($"The {CurrentMonster.Name} was just too powerful for you to defeat.");
+                    RaiseMessage("Taking your last breath, you praised the gods and joined the gods above.");
+                    RaiseMessage("The people will surely remember your name for time eternal");
+                    CurrentLocation = CurrentWorld.LocationAt(0, 0);
+                    CurrentPlayer.Health = 100;
+                }
+            }
             if (CurrentItem.MinDamage < 0)
             {
                 CurrentPlayer.Health -= CurrentItem.MinDamage;
-                RaiseMessage($"You gained {CurrentItem.MinDamage} health points");
+                RaiseMessage($"You gained {-CurrentItem.MinDamage} health points");
                 RaiseMessage("");
-                CurrentPlayer.Inventory.Remove(CurrentItem);
+                CurrentPlayer.RemoveItemFromInventory(CurrentItem);
             }
             else
             {
-                Random rnd = new Random();
                 int damage = rnd.Next(CurrentItem.MinDamage, CurrentItem.MaxDamage);
                 CurrentMonster.Health -= damage;
                 RaiseMessage($"You did {damage} points damage to the {CurrentMonster.Name}");
                 RaiseMessage("");
+
+                if (CurrentMonster.Health <= 0)
+                {
+                    RaiseMessage($"You beat the {CurrentMonster.Name}!!");
+                    RaiseMessage("");
+                    CurrentMonster = null;
+                    return;
+                }
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

@@ -80,7 +80,11 @@ namespace Engine
                 OnPropertyChanged(nameof(Weapons));
             }
         }
-
+        public void RemoveItemFromInventory(Item item)
+        {
+            Inventory.Remove(item);
+            OnPropertyChanged(nameof(Weapons));
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

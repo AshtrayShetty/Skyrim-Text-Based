@@ -13,6 +13,8 @@ namespace Engine
         private string _description;
         private int _health;
         private int _gold;
+        private int _minDamage;
+        private int _maxDamage;
         public string Name
         {
             get => _name;
@@ -49,12 +51,32 @@ namespace Engine
                 OnPropertyChanged(nameof(Gold));
             }
         }
-        public Monster(string name, string desc, int health, int gold)
+        public int MinDamage
+        {
+            get => _minDamage;
+            set
+            {
+                _minDamage = value;
+                OnPropertyChanged(nameof(MinDamage));
+            }
+        }
+        public int MaxDamage
+        {
+            get => _maxDamage;
+            set
+            {
+                _maxDamage = value;
+                OnPropertyChanged(nameof(MaxDamage));
+            }
+        }
+        public Monster(string name, string desc, int health, int gold, int minDamage, int maxDamage)
         {
             Name = name;
             Description = desc;
             Health = health;
             Gold = gold;
+            MinDamage = minDamage;
+            MaxDamage = maxDamage;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
