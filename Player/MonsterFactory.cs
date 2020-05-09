@@ -18,7 +18,7 @@ namespace Engine
                     for(int i = 0; i < 3; ++i)
                     {
                         double probablilty = rnd.NextDouble();
-                        if (probablilty > 0.5) { skewer.RewardItems.Add(ItemFactory.AddItem(i)); }
+                        if (probablilty > 0.5) { skewer.RewardItems.Add(ItemFactory.AddItem(i+1)); }
                     }
                     return skewer;
 

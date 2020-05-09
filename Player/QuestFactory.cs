@@ -11,10 +11,16 @@ namespace Engine
     {
         public static void GiveQuest(int id, Location location)
         {
+            Random rnd = new Random();
             switch (id)
             {
                 case 1:
-                    location.QuestHere = new Quest("Escape from helgen", "Flee from the scene of destruction caused by Alduin and get to safety");
+                    location.QuestHere = new Quest("Escape from helgen", 
+                        "Flee from the scene of destruction caused by Alduin and get to safety", 
+                        rnd.Next(15, 100), 
+                        rnd.Next(50, 100));
+                    location.QuestHere.ItemsList.Add(ItemFactory.AddItem(2));
+                    location.QuestHere.ItemsList.Add(ItemFactory.AddItem(2));
                     break;
 
                 default:
