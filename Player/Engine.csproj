@@ -56,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quest.cs" />
     <Compile Include="QuestFactory.cs" />
+    <Compile Include="Trader.cs" />
     <Compile Include="World.cs" />
     <Compile Include="WorldFactory.cs" />
   </ItemGroup>

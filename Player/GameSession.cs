@@ -12,6 +12,7 @@ namespace Engine
         private Location _currentLocation;
         private Monster _currentMonster;
         private Player _currentPlayer;
+        private Trader _currentTrader;
         public Player CurrentPlayer
         {
             get => _currentPlayer;
@@ -36,6 +37,7 @@ namespace Engine
 
                 GiveQuestAtLocation();
                 GetMonstersAtLocation();
+                GetTraderAtLocation();
             }
         }
         public Monster CurrentMonster
@@ -51,6 +53,22 @@ namespace Engine
                 {
                     RaiseMessage("");
                     RaiseMessage($"You see a {CurrentMonster.Name} here.");
+                }
+            }
+        }
+        public Trader CurrentTrader
+        {
+            get => _currentTrader;
+            set
+            {
+                _currentTrader = value;
+                OnPropertyChanged(nameof(CurrentTrader));
+                OnPropertyChanged(nameof(HasTrader));
+
+                if (CurrentTrader != null)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"You see {CurrentTrader.Name} the trader here.");
                 }
             }
         }
@@ -73,6 +91,7 @@ namespace Engine
         public bool HasEast => CurrentWorld.LocationAt(CurrentLocation.xCoord + 1, CurrentLocation.yCoord) != null;
         public bool HasWest => CurrentWorld.LocationAt(CurrentLocation.xCoord - 1, CurrentLocation.yCoord) != null;
         public bool HasMonster => CurrentMonster != null;
+        public bool HasTrader => CurrentTrader != null;
         private void GetMonstersAtLocation()
         {
             CurrentMonster = CurrentLocation.GetMonster();
@@ -172,6 +191,18 @@ namespace Engine
                 }
             }
         }
+        private void GetTraderAtLocation()
+        {
+            if (CurrentLocation.TraderHere != null)
+            {
+                CurrentTrader = CurrentLocation.TraderHere;
+            }
+            else
+            {
+                CurrentTrader = null;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<GameMessageEventArgs> OnMessageRaised;
 

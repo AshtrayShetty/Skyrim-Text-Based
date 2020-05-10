@@ -14,6 +14,7 @@ namespace Engine
         private string _name;
         private string _description;
         private Quest _quest;
+        private Trader _trader;
         public int xCoord
         {
             get => _xCoord;
@@ -59,6 +60,15 @@ namespace Engine
                 OnPropertyChanged(nameof(QuestHere));
             }
         }
+        public Trader TraderHere
+        {
+            get => _trader;
+            set
+            {
+                _trader = value;
+                OnPropertyChanged(nameof(TraderHere));
+            }
+        }
         public Location(int x, int y, string name, string desc)
         {
             xCoord = x;
@@ -85,6 +95,17 @@ namespace Engine
                 if (monsterEncounter.ChanceOfEncounter >= chance) { return MonsterFactory.GetMonster(monsterEncounter.ID); }
             }
             return MonsterFactory.GetMonster(_monsters.Last().ID);
+        }
+        public void AddTrader(string name)
+        {
+            TraderHere = new Trader(name);
+            Random rnd = new Random();
+            int i = 0;
+            while (i < 5)
+            {
+                TraderHere.Items.Add(ItemFactory.AddItem(rnd.Next(1, 4)));
+                ++i;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -159,7 +159,7 @@
                     </Grid.ColumnDefinitions>
                     <Button Grid.Row="0" Grid.Column="1" Content="North" Click="Button_Click_North" Visibility="{Binding HasNorth, Converter={StaticResource BooleanToVisibility}}"/>
                     <Button Grid.Row="1" Grid.Column="0" Content="West" Click="Button_Click_West" Visibility="{Binding HasWest, Converter={StaticResource BooleanToVisibility}}"/>
-                    <Button Grid.Row="1" Grid.Column="1" Content="Trade" Margin="1,2,1,1"/>
+                    <Button Grid.Row="1" Grid.Column="1" Content="Trade" Margin="1,2,1,1" Click="Button_Click_Trade" Visibility="{Binding HasTrader, Converter={StaticResource BooleanToVisibility}}"/>
                     <Button Grid.Row="1" Grid.Column="2" Content="East" Click="Button_Click_East" Visibility="{Binding HasEast, Converter={StaticResource BooleanToVisibility}}"/>
                     <Button Grid.Row="2" Grid.Column="1" Content="South" Click="Button_Click_South" Visibility="{Binding HasSouth, Converter={StaticResource BooleanToVisibility}}"/>
                 </Grid>

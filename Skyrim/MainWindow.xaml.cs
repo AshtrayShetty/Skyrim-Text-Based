@@ -74,6 +74,14 @@ namespace Skyrim
             _gameSession.UseInventory();
         }
 
+        private void Button_Click_Trade(object sender, RoutedEventArgs e)
+        {
+            TraderWindow traderWindow = new TraderWindow();
+            traderWindow.DataContext = _gameSession;
+            traderWindow.Owner = this;
+            traderWindow.Show();
+        }
+
         private void RaiseGameMessage(object sender, GameMessageEventArgs e)
         {
             GameMessages.Document.Blocks.Add(new Paragraph(new Run(e.Message)));
